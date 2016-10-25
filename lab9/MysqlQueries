@@ -1,0 +1,29 @@
+create database lab9db;
+use lab9db;
+create table Department(Dept_Id integer,Dept_Name varchar(100));
+create table Employee(Name varchar(100),Salary integer,Dept_Name varchar(100));
+show tables;
+desc Department;
+desc Employee;
+insert into Department (Dept_Id,Dept_Name) values (101,'Metallurgy');
+insert into Department (Dept_Id,Dept_Name) values (102,'Chemistry');
+select * from Department;
+insert into Employee values ('Ram',10000,'Metallurgy');
+insert into Employee values ('Nikhil',9000,'Chemistry');
+insert into Employee values ('Mohan',8000,'Chemistry');
+insert into Employee values ('Sushil',6000,'Metallurgy');
+insert into Employee values ('Ganesh',15000,'Chemistry');
+select * from Employee;
+
+select Dept_Id from Department where Dept_Name=(select Dept_Name from Employee where Name='Sushil');
+
+select count(*) from Employee where Dept_Name='Chemistry';
+
+select count(*) from Department;
+
+delete from Employee where salary<10000;
+select * from Employee;
+
+alter table Employee add Address varchar(100);
+update Employee set Address='IIIT Guwahati';
+select * from Employee;

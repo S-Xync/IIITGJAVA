@@ -1,0 +1,9 @@
+create database lab9db;
+use lab9db;
+create table Department(Dept_Id integer,Dept_Name varchar(100));
+create table Employee(Name varchar(100),Salary integer,Dept_Name varchar(100));
+show tables;
+desc Department;
+desc Employee;
+
+
