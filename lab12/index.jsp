@@ -20,15 +20,19 @@
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.Statement" %>
+
 <%
     String dbString = "jdbc:mysql://localhost:3306/lab12db?user=root&password=mysql&useSSL=false";
     try {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(dbString);
         Statement statement = connection.createStatement();
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees values(?,?,?)");
-        FileReader fr = new FileReader("./Employee");
+        String jspPath=session.getServletContext().getRealPath("/");
+        String filePath=jspPath+"/Employee";
+        FileReader fr = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fr);
         statement.executeUpdate("CREATE TABLE employees(id INTEGER,name TEXT,salary INTEGER)");
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO employees values(?,?,?)");
         String line = "";
         String[] lineArr;
         while ((line = br.readLine()) != null) {
@@ -41,7 +45,7 @@
 %>
 <form action="employee.jsp">
     Name:<input type="text" name="name">
-    <input type="submit" value="submit"/>
+    <input type="submit" value="submit">
 </form>
 <%
         connection.close();

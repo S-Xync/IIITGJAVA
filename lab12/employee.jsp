@@ -23,10 +23,11 @@
 <%
     String dbString = "jdbc:mysql://localhost:3306/lab12db?user=root&password=mysql&useSSL=false";
     try {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(dbString);
         Statement statement = connection.createStatement();
         ResultSet resultSet;
-        resultSet = statement.executeQuery("SELECT * FROM employees WHERE name=" + name);
+        resultSet = statement.executeQuery("SELECT * FROM employees WHERE name='" + name+"'");
 %>
 <%
     if (!resultSet.next()) {
